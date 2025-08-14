@@ -16,26 +16,27 @@ body {
 header {
     position: sticky;
     top: 0;
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--white); /* Swapped to white */
+    color: var(--black);
     padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Soft shadow for separation */
 }
 
 header img {
     height: 80px; /* Larger logo for visibility */
     width: auto;
     border-radius: 8px;
-    background-color: var(--white); /* Matches your logo background */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Light shadow for contrast */
-    padding: 5px; /* Small padding to give breathing room */
+    background-color: var(--white);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Softer shadow for white header */
+    padding: 5px;
 }
 
 nav a {
-    color: var(--white);
+    color: var(--black); /* Changed to black for visibility on white */
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
@@ -43,7 +44,7 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--blue);
+    color: var(--blue); /* Blue hover effect */
 }
 
 /* Hero Section */
@@ -136,3 +137,6 @@ footer {
     }
     nav a {
         margin: 0 8px;
+        font-size: 0.9rem;
+    }
+}
