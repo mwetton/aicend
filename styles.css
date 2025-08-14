@@ -16,27 +16,24 @@ body {
 header {
     position: sticky;
     top: 0;
-    background-color: var(--white); /* Swapped to white */
+    background-color: var(--white) !important; /* force white */
     color: var(--black);
-    padding: 10px 20px;
+    padding: 15px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Soft shadow for separation */
 }
 
 header img {
-    height: 80px; /* Larger logo for visibility */
+    height: 80px;
     width: auto;
     border-radius: 8px;
-    background-color: var(--white);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Softer shadow for white header */
-    padding: 5px;
 }
 
 nav a {
-    color: var(--black); /* Changed to black for visibility on white */
+    color: var(--black);
     margin: 0 15px;
     text-decoration: none;
     font-weight: bold;
@@ -44,7 +41,7 @@ nav a {
 }
 
 nav a:hover {
-    color: var(--blue); /* Blue hover effect */
+    color: var(--blue);
 }
 
 /* Hero Section */
