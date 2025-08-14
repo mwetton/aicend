@@ -1,439 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AIcent — Automate. Integrate. Ascend.</title>
-  <meta name="description" content="AIcent builds AI automations and system integrations to help businesses scale — Automate. Integrate. Ascend." />
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --blue:#2AC2F3;
-      --black:#000;
-      --white:#fff;
-      --muted:#F5F5F5;
-      --max-width:1100px;
-      --radius:12px;
-      --glass: rgba(255,255,255,0.06);
-      --ease: cubic-bezier(.2,.9,.3,1);
-    }
-
-    /* Reset + base */
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
-      color:var(--black);
-      background:var(--white);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-    }
-
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;height:auto;display:block}
-
-    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
-
-    /* NAV */
-    header{
-      position:fixed;top:0;left:0;right:0;z-index:40;
-      background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.15));
-      backdrop-filter: blur(6px);
-    }
-    .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:var(--max-width);margin:0 auto}
-    .brand{
-      display:flex;align-items:center;gap:12px;font-weight:700;font-size:18px;color:var(--white);
-    }
-    .brand .aiblue{color:var(--blue);font-weight:900}
-    .brand .cent{color:var(--white);font-weight:700;mix-blend-mode:normal}
-    nav{display:flex;gap:18px;align-items:center}
-    nav a{color:rgba(255,255,255,0.95);font-weight:500;padding:8px;border-radius:8px}
-    nav a:hover{background:rgba(255,255,255,0.04)}
-    .cta-nav{background:var(--blue);color:var(--black);padding:8px 12px;border-radius:8px;font-weight:700}
-    .mobile-toggle{display:none;background:transparent;border:0;color:var(--white);font-size:20px}
-
-    /* HERO */
-    .hero{
-      min-height:84vh;
-      display:grid;
-      grid-template-columns:1fr;
-      align-items:center;
-      padding:120px 0 60px;
-      background:linear-gradient(180deg,#000 0%, #070707 55%);
-      color:var(--white);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero .inner{display:flex;gap:48px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:0 20px}
-    .hero-left{max-width:660px}
-    .logo-lockup{display:flex;align-items:baseline;gap:8px;font-size:20px}
-    .logo-lockup .aiblue{color:var(--blue);font-weight:900;font-size:28px}
-    .logo-lockup .cent{color:var(--white);font-weight:700;font-size:28px}
-    h1{font-size:48px;line-height:1.02;margin:14px 0 12px;letter-spacing:-0.6px}
-    @media (max-width:620px){ h1{font-size:34px} }
-
-    .hero p.lead{font-size:18px;color:rgba(255,255,255,0.88);margin:0 0 24px}
-    .hero .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{
-      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:10px;border:0;font-weight:700;cursor:pointer;transition:all .22s var(--ease)
-    }
-    .btn-primary{background:var(--blue);color:var(--black);box-shadow:0 8px 30px rgba(42,194,243,0.14)}
-    .btn-primary:hover{transform:translateY(-3px)}
-    .btn-ghost{background:transparent;color:rgba(255,255,255,0.95);border:1px solid rgba(255,255,255,0.08)}
-    .hero-features{display:flex;gap:14px;margin-top:24px;flex-wrap:wrap}
-
-    /* mountain graphic */
-    .hero-right{flex:1;min-width:300px;display:flex;align-items:center;justify-content:center}
-    .mountain-wrap{width:100%;max-width:520px;filter:drop-shadow(0 24px 60px rgba(42,194,243,0.08))}
-
-    /* SECTIONS */
-    section{padding:72px 0}
-    .section-title{font-size:20px;margin:0 0 18px;font-weight:700;color:var(--black)}
-    .muted{color:#6b6b6b}
-
-    /* services */
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .card{background:var(--muted);padding:20px;border-radius:14px;min-height:140px;box-shadow:0 6px 24px rgba(2,6,23,0.04);transition:transform .22s var(--ease)}
-    .card:hover{transform:translateY(-8px)}
-    .card h4{margin:8px 0 6px}
-    .icon{width:44px;height:44px;border-radius:10px;display:inline-grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.6));color:var(--black);font-weight:700}
-
-    /* portfolio */
-    .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .proj{border-radius:12px;overflow:hidden;background:#111;color:var(--white);min-height:160px;display:flex;flex-direction:column;justify-content:space-between;padding:16px;position:relative}
-    .proj .tag{font-size:12px;opacity:0.9}
-    .proj .title{font-size:18px;margin:10px 0 6px;font-weight:700}
-    .proj .meta{font-size:13px;color:rgba(255,255,255,0.8)}
-    .proj .pill{background:rgba(255,255,255,0.06);padding:6px 8px;border-radius:999px;font-size:12px;display:inline-block}
-
-    /* testimonial */
-    .testimonial{background:linear-gradient(180deg, rgba(42,194,243,0.06), rgba(42,194,243,0.02));padding:30px;border-radius:14px}
-    .quote{font-weight:600;font-size:18px;margin:0 0 10px}
-
-    /* final CTA */
-    .final-cta{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px;border-radius:14px;background:#0b0b0b;color:var(--white)}
-    .final-cta h3{margin:0;font-size:22px}
-
-    /* footer */
-    footer{padding:32px 0;color:#666;font-size:14px;text-align:center}
-
-    /* responsive */
-    @media (max-width:980px){
-      .cards{grid-template-columns:repeat(2,1fr)}
-      .portfolio-grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:720px){
-      nav{display:none}
-      .mobile-toggle{display:block}
-      .hero{padding-top:110px}
-      .hero-inner{flex-direction:column}
-      .cards{grid-template-columns:1fr}
-      .portfolio-grid{grid-template-columns:1fr}
-      .hero-left{max-width:100%}
-      .final-cta{flex-direction:column;align-items:flex-start}
-    }
-
-    /* small niceties: focus styles */
-    a:focus, button:focus {outline:3px solid rgba(42,194,243,0.18);outline-offset:3px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIcend – Helping Your Business Ascend with AI</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- NAV -->
-  <header>
-    <div class="nav-wrap container">
-      <div class="brand" aria-hidden="true">
-        <span class="aiblue">AI</span><span class="cent">cent</span>
-      </div>
-
-      <nav aria-label="Primary navigation">
-        <a href="#services">Services</a>
-        <a href="#portfolio">Portfolio</a>
+<header>
+    <img src="logo-placeholder.png" alt="AIcend Logo">
+    <nav>
         <a href="#about">About</a>
-        <a href="#insights">Insights</a>
-        <a class="cta-nav" href="#contact">Get a Consultation</a>
-      </nav>
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-      <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">☰</button>
-    </div>
-    <!-- simple mobile menu -->
-    <div id="mobileMenu" style="display:none;background:rgba(0,0,0,0.9);padding:12px 20px;">
-      <a href="#services" style="display:block;padding:8px 0;color:var(--white)">Services</a>
-      <a href="#portfolio" style="display:block;padding:8px 0;color:var(--white)">Portfolio</a>
-      <a href="#about" style="display:block;padding:8px 0;color:var(--white)">About</a>
-      <a href="#contact" style="display:block;padding:8px 0;color:var(--white)">Get a Consultation</a>
-    </div>
-  </header>
+<section class="hero">
+    <h1>AIcend</h1>
+    <p>Helping Your Business Ascend with AI</p>
+    <a href="#contact" class="cta-btn">Get Started</a>
+</section>
 
-  <!-- HERO -->
-  <main>
-    <section class="hero" role="region" aria-label="Hero">
-      <div class="container inner">
-        <div class="hero-left">
-          <div class="logo-lockup">
-            <span class="aiblue">AI</span><span class="cent">cent</span>
-          </div>
-          <h1><strong>Automate. Integrate. Ascend.</strong></h1>
-          <p class="lead">We help businesses climb higher by streamlining processes with cutting-edge AI automation and seamless system integrations.</p>
+<section id="about">
+    <h2>About Us</h2>
+    <p>
+        AIcend is an AI automation business here to help your company ascend to the next level.
+        We design and implement custom-tailored automation solutions — from intelligent chatbots 
+        to advanced email management systems — built around your exact needs.
+    </p>
+    <p>
+        Our mission is simple: free you from repetitive, time-consuming tasks so you can focus on growth.
+    </p>
+</section>
 
-          <div class="cta-row" role="group" aria-label="Primary call to actions">
-            <a class="btn btn-primary" href="#contact">Book Your Free Consultation</a>
-            <a class="btn btn-ghost" href="#portfolio">See Portfolio</a>
-          </div>
+<section id="tech">
+    <h2>Technology Stack</h2>
+    <p>
+        Our solutions are powered by <strong>n8n</strong>, a flexible and powerful automation platform that serves 
+        as the backbone of our systems. We integrate a wide range of APIs to create almost limitless functionality. 
+        If you can imagine it, it’s not beyond the limits of your ascent.
+    </p>
+</section>
 
-          <div class="hero-features">
-            <div class="pill muted">Fast deployment</div>
-            <div class="pill muted">ROI-focused</div>
-            <div class="pill muted">Enterprise-ready</div>
-          </div>
-        </div>
+<section id="services">
+    <h2>Services</h2>
+    <ul>
+        <li>Custom AI Chatbots – Automate customer support, lead capture, and FAQs.</li>
+        <li>Email Automation – Intelligent email sorting, auto-replies, and scheduling.</li>
+        <li>Workflow Automation – Streamline complex business processes end-to-end.</li>
+        <li>Data Handling & Processing – Automatically organize, process, and route information.</li>
+    </ul>
+</section>
 
-        <div class="hero-right">
-          <div class="mountain-wrap" aria-hidden="true">
-            <!-- SVG mountain with animated blue contour -->
-            <svg viewBox="0 0 800 520" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="g" x1="0" x2="1">
-                  <stop offset="0" stop-color="#2AC2F3" stop-opacity="0.98"/>
-                  <stop offset="1" stop-color="#00A9D9" stop-opacity="0.9"/>
-                </linearGradient>
-                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="8" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
+<section id="process">
+    <h2>How We Work</h2>
+    <ol>
+        <li>Discovery Call – We learn your needs and identify automation opportunities.</li>
+        <li>Custom Solution Design – Tailored automation built for your business.</li>
+        <li>Implementation & Testing – Full setup, integration, and fine-tuning.</li>
+        <li>Ongoing Support – Continuous maintenance and updates via monthly retainer.</li>
+    </ol>
+</section>
 
-              <!-- subtle filled mountain -->
-              <path d="M0 420 L160 240 L320 360 L460 190 L620 340 L800 220 L800 520 L0 520 Z"
-                    fill="rgba(42,194,243,0.03)"></path>
+<section id="pricing">
+    <h2>Pricing</h2>
+    <ul>
+        <li>Initial Setup Fee – Covers development, integration, and launch.</li>
+        <li>Monthly Retainer – Ensures smooth operations and rapid support.</li>
+        <li>Custom Quotes – Pricing depends on project size and complexity.</li>
+    </ul>
+</section>
 
-              <!-- animated contour lines -->
-              <path class="contour" d="M10 430 L170 250 L330 370 L470 210 L630 360 L790 230"
-                    fill="none" stroke="url(#g)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="filter:url(#glow)">
-                <animate attributeName="stroke-dasharray" from="0 2000" to="2000 0" dur="3.6s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.9;0.55;0.9" dur="3.6s" repeatCount="indefinite" />
-              </path>
+<section>
+    <h2>Why Choose AIcend?</h2>
+    <ul>
+        <li>100% custom solutions — no cookie-cutter builds.</li>
+        <li>Scalable automation that grows with you.</li>
+        <li>Reliable, responsive support.</li>
+        <li>Technology designed for limitless possibilities.</li>
+    </ul>
+</section>
 
-              <!-- rising data stream (dots) -->
-              <g>
-                <circle cx="160" cy="250" r="3" fill="#2AC2F3">
-                  <animate attributeName="cy" dur="4s" values="250;140;250" repeatCount="indefinite" />
-                  <animate attributeName="opacity" dur="4s" values="1;0.2;1" repeatCount="indefinite" />
-                </circle>
-                <circle cx="470" cy="210" r="3" fill="#2AC2F3">
-                  <animate attributeName="cy" dur="3.2s" values="210;120;210" repeatCount="indefinite" />
-                  <animate attributeName="opacity" dur="3.2s" values="1;0.2;1" repeatCount="indefinite" />
-                </circle>
-                <circle cx="630" cy="360" r="3" fill="#2AC2F3">
-                  <animate attributeName="cy" dur="4.4s" values="360;230;360" repeatCount="indefinite" />
-                  <animate attributeName="opacity" dur="4.4s" values="1;0.2;1" repeatCount="indefinite" />
-                </circle>
-              </g>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="contact" class="contact-info">
+    <h2>Contact Us</h2>
+    <p><strong>Name:</strong> [Your Name]</p>
+    <p><strong>Email:</strong> [Your Email]</p>
+    <p><strong>Phone:</strong> [Your Phone Number]</p>
+</section>
 
-    <!-- SERVICES -->
-    <section id="services" class="container" role="region" aria-label="Services">
-      <h2 class="section-title">Your Ascent Starts Here</h2>
-      <p class="muted">We design AI automations and integrations that remove friction, reduce costs, and scale your operations.</p>
+<footer>
+    &copy; 2025 AIcend. All rights reserved.
+</footer>
 
-      <div style="height:18px"></div>
-
-      <div class="cards" aria-hidden="false">
-        <article class="card" aria-labelledby="s1">
-          <div style="display:flex;gap:12px;align-items:flex-start">
-            <div class="icon">A</div>
-            <div>
-              <h4 id="s1">Process Automation</h4>
-              <p class="muted">Eliminate repetitive tasks with AI-powered workflows that operate 24/7.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" aria-labelledby="s2">
-          <div style="display:flex;gap:12px;align-items:flex-start">
-            <div class="icon">∑</div>
-            <div>
-              <h4 id="s2">System Integrations</h4>
-              <p class="muted">Connect your tools so data flows seamlessly and decisions become real-time.</p>
-            </div>
-          </div>
-        </article>
-
-        <article class="card" aria-labelledby="s3">
-          <div style="display:flex;gap:12px;align-items:flex-start">
-            <div class="icon">Ψ</div>
-            <div>
-              <h4 id="s3">Custom AI Solutions</h4>
-              <p class="muted">Tailored automations for your industry — from AI assistants to document AI pipelines.</p>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section class="container" role="region" aria-label="Why AIcent">
-      <h2 class="section-title">We build automations that pay for themselves</h2>
-      <p class="muted">Fast, future-proof solutions focused on clear ROI.</p>
-
-      <div style="display:flex;gap:18px;margin-top:18px;flex-wrap:wrap">
-        <div style="flex:1;min-width:220px;background:var(--muted);padding:18px;border-radius:12px">
-          <strong>Speed of Delivery</strong>
-          <p class="muted" style="margin:8px 0 0">From idea to production in weeks — not months.</p>
-        </div>
-
-        <div style="flex:1;min-width:220px;background:var(--muted);padding:18px;border-radius:12px">
-          <strong>Future-Proof</strong>
-          <p class="muted" style="margin:8px 0 0">Scalable, maintainable systems built with modern APIs and standards.</p>
-        </div>
-
-        <div style="flex:1;min-width:220px;background:var(--muted);padding:18px;border-radius:12px">
-          <strong>ROI-Driven</strong>
-          <p class="muted" style="margin:8px 0 0">We measure impact — time saved, errors reduced, revenue improved.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section id="portfolio" class="container" role="region" aria-label="Portfolio">
-      <h2 class="section-title">Climbs We’ve Already Made</h2>
-      <p class="muted">Short case teasers — real results, real automation.</p>
-
-      <div style="height:18px"></div>
-
-      <div class="portfolio-grid">
-        <article class="proj" aria-labelledby="p1">
-          <div>
-            <div class="tag">Retail • Operations</div>
-            <div class="title" id="p1">Slack Order Tracker Bot</div>
-            <div class="meta">Reduced manual status updates by <strong>90%</strong>. Integrates Shopify → Slack → Fulfilment API.</div>
-          </div>
-          <div style="margin-top:12px">
-            <span class="pill">Zapier + Custom Lambda</span>
-          </div>
-        </article>
-
-        <article class="proj" aria-labelledby="p2">
-          <div>
-            <div class="tag">SaaS • Sales</div>
-            <div class="title" id="p2">CRM Auto-Sync Integration</div>
-            <div class="meta">Unified customer data across CRM, billing & support; saved 20+ hours/week.</div>
-          </div>
-          <div style="margin-top:12px"><span class="pill">Make / Node.js</span></div>
-        </article>
-
-        <article class="proj" aria-labelledby="p3">
-          <div>
-            <div class="tag">Support • HR</div>
-            <div class="title" id="p3">AI Support Assistant</div>
-            <div class="meta">Handled 60% of inbound queries instantly; improved NPS.</div>
-          </div>
-          <div style="margin-top:12px"><span class="pill">ChatGPT API + RAG</span></div>
-        </article>
-      </div>
-
-      <div style="margin-top:18px">
-        <a href="#portfolio" class="btn btn-ghost">View Full Portfolio</a>
-      </div>
-    </section>
-
-    <!-- TESTIMONIAL -->
-    <section class="container" role="region" aria-label="Testimonial">
-      <div class="testimonial">
-        <p class="quote">“AIcent delivered in 3 weeks what would’ve taken us 3 months internally — and we’ve already seen a 4× ROI.”</p>
-        <div class="muted">— Operations Director, E-Commerce Brand</div>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="container" role="region" aria-label="Call to action">
-      <div class="final-cta">
-        <div>
-          <h3>Let’s start your ascent today.</h3>
-          <p class="muted" style="margin-top:8px">Book a free consultation and discover what automation could do for your business in the next 30 days.</p>
-        </div>
-        <div style="display:flex;gap:12px;align-items:center">
-          <a class="btn btn-primary" href="#contact">Book Now</a>
-          <a class="btn btn-ghost" href="#contact">Contact Us</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT (simple) -->
-    <section id="contact" class="container" role="region" aria-label="Contact">
-      <h2 class="section-title">Get in touch</h2>
-      <p class="muted">Prefer to schedule? Add a Calendly embed or paste your booking link where indicated below.</p>
-
-      <form style="display:grid;gap:12px;max-width:720px;margin-top:14px">
-        <input name="name" required placeholder="Full name" style="padding:12px;border-radius:10px;border:1px solid #e6e6e6" />
-        <input name="email" type="email" required placeholder="Email address" style="padding:12px;border-radius:10px;border:1px solid #e6e6e6" />
-        <input name="company" placeholder="Company (optional)" style="padding:12px;border-radius:10px;border:1px solid #e6e6e6" />
-        <textarea name="message" rows="4" placeholder="Tell us about the automation you need…" style="padding:12px;border-radius:10px;border:1px solid #e6e6e6"></textarea>
-        <div style="display:flex;gap:12px">
-          <button type="submit" class="btn btn-primary">Send message</button>
-          <a class="btn btn-ghost" href="#" onclick="event.preventDefault();alert('Use Calendly embed or link to schedule');">Schedule (Calendly)</a>
-        </div>
-      </form>
-    </section>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-        <div style="color:#222;font-weight:700"><span style="color:var(--blue);font-weight:900">AI</span><span style="color:#222;font-weight:700">cent</span></div>
-        <div style="color:#666">© <span id="year"></span> AIcent • <span class="muted">aicent.co.uk</span></div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // mobile menu toggle
-    const toggle = document.getElementById('mobileToggle');
-    const menu = document.getElementById('mobileMenu');
-    toggle.addEventListener('click', () => {
-      const open = menu.style.display === 'block';
-      menu.style.display = open ? 'none' : 'block';
-      toggle.setAttribute('aria-expanded', String(!open));
-    });
-
-    // set year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', function(e){
-        const target = document.querySelector(this.getAttribute('href'));
-        if(target){
-          e.preventDefault();
-          target.scrollIntoView({behavior:'smooth', block:'start'});
-          // close mobile menu if open
-          if(window.innerWidth < 720) menu.style.display = 'none';
-        }
-      });
-    });
-
-    // basic form handler (placeholder) — adapt to your backend or email provider
-    document.querySelector('form')?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thanks — message captured. Implement a backend endpoint or form integration (e.g. Formspree, Netlify Forms, or your own API) to handle submissions.');
-      e.target.reset();
-    });
-  </script>
 </body>
-<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-
-	createChat({
-		webhookUrl: 'https://n8n.aicend.co.uk/webhook/5de10436-8b0a-4c71-96c2-5ff871b701cf/chat'
-	});
-</script>
 </html>
