@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIcend</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="#hero"><div class="logo-container"><img src="logo.png" alt="AIcend Logo"></div></a></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#projects">Projects</a></li>
+                
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div class="hero-container">
+            <h1>Welcome to <span class="ai">AI</span><span class="cend">cend</span></h1>
+            <p>Your partner in AI-powered solutions.</p>
+            <a href="#contact" class="cta-button">Get in Touch</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p><span class="ai">AI</span><span class="cend">cend</span> is a leading provider of innovative AI solutions. We specialize in developing cutting-edge technology to help businesses grow and succeed.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="info-card">
+                    <h3>AI Consulting</h3>
+                    <p>Expert advice for leveraging AI for business and customer-focused solutions.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Custom AI Solutions</h3>
+                    <p>Give AI the tools it needs to complete specific tasks efficiently.</p>
+                </div>
+                <div class="info-card">
+                    <h3>AI Integration</h3>
+                    <p>Seamlessly integrate AI into existing systems to automate tasks, improve productivity, and enhance customer interactions.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Automations</h3>
+                    <p>General automation solutions to streamline repetitive tasks.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Our Projects</h2>
+            <div class="projects-grid">
+                <div class="info-card">
+                    <h3>Custom Chatbots</h3>
+                    <p>Trained on company information for customer support and outreach.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Customer Outreach & Reviews</h3>
+                    <p>After appointments to boost online presence.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Automated Email Workflows</h3>
+                    <p>Sorting, auto-replies, scheduling.</p>
+                </div>
+                <div class="info-card">
+                    <h3>Task Automation</h3>
+                    <p>Almost any repetitive task that wastes time — contact us to automate it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form id="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    <div class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <div class="error-message"></div>
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                    <div class="error-message"></div>
+                </div>
+                <button type="submit" class="cta-button">Send Message</button>
+                <div id="form-message" style="display: none; margin-top: 15px;"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 <span class="ai">AI</span><span class="cend">cend</span>. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module">
+      import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+      createChat({
+        webhookUrl: 'https://morning-recipe-dbbb.matthew-wetton1.workers.dev/'
+      });
+    </script>
+</body>
+</html>
