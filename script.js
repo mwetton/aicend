@@ -48,42 +48,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const formMessage = document.getElementById('form-message');
 
     if (contactForm) {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
+        contactForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // prevents page reload
 
-            if (validateForm()) {
-                const formData = new FormData(contactForm);
-                const data = Object.fromEntries(formData.entries());
+            if (!validateForm()) return; // stop if invalid
 
-                fetch('https://contact-relay.matthew-wetton1.workers.dev/', {
+            const formData = new FormData(contactForm);
+            const data = Object.fromEntries(formData.entries());
+            console.log('Sending data:', data); // debug
+
+            try {
+                const response = await fetch('https://contact-relay.matthew-wetton1.workers.dev/', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        formMessage.textContent = 'Your message has been sent!';
-                        formMessage.style.display = 'block';
-                        formMessage.classList.remove('error');
-                        formMessage.classList.add('success');
-                        contactForm.reset();
-                    } else {
-                        formMessage.textContent = 'An error occurred. Please try again.';
-                        formMessage.style.display = 'block';
-                        formMessage.classList.remove('success');
-                        formMessage.classList.add('error');
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                console.log('Worker response:', result);
+
+                if (result.success) {
+                    formMessage.textContent = 'Your message has been sent!';
+                    formMessage.style.display = 'block';
+                    formMessage.classList.remove('error');
+                    formMessage.classList.add('success');
+                    contactForm.reset();
+                } else {
                     formMessage.textContent = 'An error occurred. Please try again.';
                     formMessage.style.display = 'block';
                     formMessage.classList.remove('success');
                     formMessage.classList.add('error');
-                });
+                }
+
+            } catch (err) {
+                console.error('Fetch error:', err);
+                formMessage.textContent = 'An error occurred. Please try again.';
+                formMessage.style.display = 'block';
+                formMessage.classList.remove('success');
+                formMessage.classList.add('error');
             }
         });
     }
