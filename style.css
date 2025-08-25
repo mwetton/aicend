@@ -1,0 +1,323 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    background-color: #121212;
+    color: #fff;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    overflow: auto;
+    padding: 0 20px;
+}
+
+/* Header */
+header {
+    background: #fff;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 999; /* Lower z-index to ensure chatbot appears on top */
+    border-bottom: 1px solid #eee;
+    transition: height 0.3s ease;
+    overflow: hidden;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between; /* Keep logo left, nav-links right initially */
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    /* No margin-right: auto needed here */
+}
+
+.logo-container {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform-origin: left center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-grow: 1; /* Allow nav-links to grow and take available space */
+    justify-content: center; /* Center the links within their available space */
+}
+
+.nav-links li {
+    padding: 0 20px;
+}
+
+.nav-links a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #00aaff;
+}
+
+
+
+/* AIcend Text Styling */
+.ai {
+    color: #2ac2f3;
+}
+
+.cend {
+    color: #fff; /* Default for dark backgrounds */
+}
+
+header .cend,
+.light-section .cend {
+    color: #000; /* For light backgrounds */
+}
+
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-container h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.cta-button {
+    display: inline-block;
+    background: #00aaff;
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #0088cc;
+}
+
+/* Sections */
+section {
+    padding: 6rem 0;
+}
+
+section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* Projects Section */
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single vertical column */
+    gap: 30px;
+}
+
+.info-card {
+    background: #1a1a1a;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Contact Section */
+.form-group {
+    margin-bottom: 15px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%; /* Make it wider */
+    width: 100%; /* Ensure it takes full width within max-width */
+    margin: auto; /* Center the form */
+}
+
+form input, form textarea {
+    padding: 15px;
+    margin-bottom: 0;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #1a1a1a;
+    color: #fff;
+    transition: border-color 0.3s ease;
+    width: 100%; /* Make inputs wider */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+form input:focus, form textarea:focus {
+    border-color: #00aaff;
+    outline: none;
+}
+
+.error-message {
+    color: #ff4d4d;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+#thank-you-message {
+    color: #2ac2f3;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#form-message {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#form-message.success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+#form-message.error {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+/* Footer */
+footer {
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+    padding: 2rem 0;
+    border-top: 1px solid #333;
+}
+
+/* What We Can Do Section */
+#what-we-can-do {
+    padding: 6rem 0;
+}
+
+#what-we-can-do h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+}
+
+.scrolling-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+
+.scrolling-content {
+    display: flex;
+    width: fit-content;
+    animation: scroll 60s linear infinite;
+}
+
+.scrolling-wrapper .info-card {
+    flex: 0 0 auto;
+    width: 300px;
+    margin-right: 20px;
+    text-align: center;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+    .logo img {
+        height: 30px;
+    }
+
+    .nav-links {
+        position: absolute;
+        right: 0px;
+        height: 92vh;
+        top: 8vh;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        transform: translateX(100%);
+        transition: transform 0.5s ease-in;
+    }
+
+    .nav-links li {
+        opacity: 0;
+    }
+
+
+    .hero-container h1 {
+        font-size: 3rem;
+    }
+}
+
+
+.nav-active {
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFade {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+
+
+#n8n-chat {
+  position: fixed !important;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
