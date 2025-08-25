@@ -1,72 +1,54 @@
-You are tasked with creating a fully functional Contact Us form for the website that works seamlessly with a Cloudflare Worker endpoint at https://contact-relay.matthew-wetton1.workers.dev/. Follow these instructions carefully:
+You are tasked with updating the “Contact Us” form on a website. Follow these instructions carefully:
 
-1. Form Structure
+Attach JavaScript correctly
 
-Create a <form> element with id="contact-form".
+Ensure the JS executes after the DOM is fully loaded. Use either defer on the <script> tag or wrap all code in DOMContentLoaded event.
 
-Include these fields, each required:
+Make sure the contact form element is correctly selected and the submit listener attaches reliably.
 
-Name (text input)
+Prevent default form submission
 
-Email (text input, must validate as proper email)
+On form submit, use event.preventDefault() to stop the page from reloading or jumping to the top.
 
-Message (textarea)
+Ensure this triggers before any other errors can stop the JS from running.
 
-Include a submit button inside the form with type="submit" and label it “Send”.
+Send form data to Cloudflare Worker
 
-Include a container element for displaying success or error messages (id="form-message").
+Submit the form via fetch() to:
+https://contact-relay.matthew-wetton1.workers.dev/
 
-2. Client-Side JavaScript
+Use POST method with Content-Type: application/json
 
-Attach a submit event listener to the form.
+Serialize the form data as JSON with JSON.stringify()
 
-Use event.preventDefault() to prevent the page from reloading or jumping.
+Add console logs for debugging
 
-Validate fields:
+Log the contact form element, the form submission, and the data being sent.
 
-Name, Email, and Message must be non-empty.
+Log the response from the Worker and any fetch errors.
 
-Email must match a proper email regex pattern.
+Display success or error messages
 
-If validation fails, show concise inline error messages below each field.
+On success ({success: true} from Worker), display a success message without reloading the page.
 
-If validation passes, convert the form data to JSON and send it to the Cloudflare Worker using fetch:
+On error, display a clear error message.
 
-fetch('https://contact-relay.matthew-wetton1.workers.dev/', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name, email, message })
-})
+Validate inputs before sending
 
+Name, email, and message fields are required.
 
-Handle fetch responses:
+Ensure the email is valid with a regex check.
 
-If success: true, display “Your message has been sent!” without reloading.
+Show inline error messages next to invalid fields.
 
-If success: false, display “An error occurred. Please try again.”
+Do not change HTML structure unnecessarily
 
-3. UX Requirements
+Only modify the JS for functionality, debugging, and validation.
 
-Do not navigate away from the current page on submission.
+Output instructions:
 
-Show success or error messages dynamically in the form-message container.
+Provide updated script.js code that implements all of the above.
 
-Clear the form inputs on successful submission.
+Include comments explaining the key changes.
 
-Make the form visually consistent with the website’s styling (use existing CSS classes where appropriate).
-
-4. Debugging & Logging
-
-Temporarily log "Submit handler triggered" in console to confirm the listener fires.
-
-Log the JSON payload before sending it to the worker to confirm data structure.
-
-5. Output
-
-Produce the complete HTML for the form.
-
-Produce the JavaScript needed to validate, submit, and handle responses.
-
-Ensure the form works correctly with the provided worker endpoint without requiring changes to the worker.
-
-Do not modify unrelated JS (like header or logo resizing scripts).
+Ensure that after submitting the form with valid inputs, the page does not reload, console logs show the request and response, and the Cloudflare Worker receives the data.
