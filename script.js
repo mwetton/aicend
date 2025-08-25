@@ -43,4 +43,89 @@ document.addEventListener('DOMContentLoaded', () => {
         header.style.height = `${newSize}px`;
         header.style.lineHeight = `${newSize}px`;
     });
+
+    const contactForm = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (validateForm()) {
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData.entries());
+
+                fetch('https://contact-relay.matthew-wetton1.workers.dev/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        formMessage.textContent = 'Your message has been sent!';
+                        formMessage.style.display = 'block';
+                        formMessage.classList.remove('error');
+                        formMessage.classList.add('success');
+                        contactForm.reset();
+                    } else {
+                        formMessage.textContent = 'An error occurred. Please try again.';
+                        formMessage.style.display = 'block';
+                        formMessage.classList.remove('success');
+                        formMessage.classList.add('error');
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    formMessage.textContent = 'An error occurred. Please try again.';
+                    formMessage.style.display = 'block';
+                    formMessage.classList.remove('success');
+                    formMessage.classList.add('error');
+                });
+            }
+        });
+    }
+
+    function validateForm() {
+        let isValid = true;
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const message = document.getElementById('message');
+
+        // Clear previous error messages
+        document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
+
+        if (name.value.trim() === '') {
+            showError(name, 'Name is required.');
+            isValid = false;
+        }
+
+        if (email.value.trim() === '') {
+            showError(email, 'Email is required.');
+            isValid = false;
+        } else if (!isValidEmail(email.value)) {
+            showError(email, 'Please enter a valid email address.');
+            isValid = false;
+        }
+
+        if (message.value.trim() === '') {
+            showError(message, 'Message is required.');
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function showError(input, message) {
+        const formGroup = input.parentElement;
+        const errorMessage = formGroup.querySelector('.error-message');
+        errorMessage.textContent = message;
+    }
+
+    function isValidEmail(email) {
+        const re = /^(([^<>()[\\]\\.,;:\s@\"]+(\.[^<>()[\\]\\.,;:\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\\.[0-9]{1,3}\\\.[0-9]{1,3}\\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 });
