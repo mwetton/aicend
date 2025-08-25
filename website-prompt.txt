@@ -1,31 +1,28 @@
-You are helping rebuild a "Contact Us" form from scratch. Follow these instructions carefully:
+You are a coding assistant. I have a website with a contact form and JavaScript (script.js) that handles form submission. Currently, the page has two main issues:
 
-1. Ensure the form is fully functional:
-   - When submitted, the form sends a JSON POST request to this URL: https://contact-relay.matthew-wetton1.workers.dev/
-   - Include the fields: name, email, message.
-   - Do not redirect or reload the page on submit; show a success or error message inline.
+An invalid email validation regex causing this console error:
 
-2. Add proper client-side validation:
-   - Name and message are required.
-   - Email is required and must be a valid email format.
-   - If validation fails, show error messages below each field in `.error-message` divs.
+Uncaught SyntaxError: Invalid regular expression: /^(([^<>()[\\]\\.,;:\s@\"]+(\.[^<>()[\\]\\.,;:\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\\.[0-9]{1,3}\\\.[0-9]{1,3}\\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/: Range out of order in character class
 
-3. Debugging/logging:
-   - Add console logs at the top of the script to confirm it loads.
-   - Log when the DOM is ready.
-   - Log form submission attempts and the JSON being sent.
-   - Log fetch success or failure and the Worker’s response.
 
-4. Ensure the submit listener actually attaches:
-   - Check that the element `#contact-form` exists before adding the listener.
-   - Use `event.preventDefault()` to prevent default page reload.
+Fix this by replacing it with a safe and simple regex.
 
-5. Make it resilient:
-   - Display success message "Your message has been sent!" inline when Worker responds with success.
-   - Display error message "An error occurred. Please try again." inline if Worker responds with error or fetch fails.
-   - Keep the page in place; do not jump to the top.
+The console shows a 404 error for /favicon.ico. Add a <link> in the HTML <head> referencing /favicon.ico.
 
-6. Wrap the fetch in `async/await` with try/catch.
-7. Keep the rest of the site functionality (hamburger menu, header resizing) intact.
-8. Ensure script can be included with `<script defer src="script.js"></script>` or placed before `</body>` and still work.
-9. Output the full `script.js` ready to replace the existing one.
+Requirements for the updated script.js:
+
+Use the simplified safe email regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+Keep all existing contact form logic, including form validation, sending data via fetch to the Cloudflare Worker, showing success/error messages.
+
+Add console logs for debugging at key points: script loaded, DOM loaded, form found, form submitted, fetch response.
+
+Ensure the page does not reload on form submission.
+
+Do not change any other site functionality (hamburger menu, header resizing).
+
+Deliverables:
+
+Full updated script.js with fixes applied.
+
+Example HTML snippet for the <head> with favicon link.
