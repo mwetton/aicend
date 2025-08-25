@@ -1,0 +1,47 @@
+Please review and fix the contact form functionality on the website. Follow these instructions carefully:
+
+Verify the form submission listener
+
+Ensure the submit listener is attached to the correct form (id="contact-form").
+
+Ensure the submit button is inside the form with type="submit".
+
+Confirm event.preventDefault() is used so the page does not jump when submitting.
+
+Validate the form
+
+Keep the existing validation for name, email, and message.
+
+Make sure invalid inputs prevent the fetch request from being sent.
+
+Ensure error messages appear correctly under each field.
+
+Send request to Cloudflare Worker
+
+The form should send a POST request to https://contact-relay.matthew-wetton1.workers.dev/ with the JSON payload.
+
+Confirm the fetch is triggered correctly when inputs are valid.
+
+Handle response and messages
+
+If submission is successful, display a success message on the same page without scrolling or jumping.
+
+If submission fails, show an error message without reloading the page.
+
+Optional debugging
+
+Temporarily log "Submit handler triggered" at the start of the submit listener to confirm it runs.
+
+Log the payload being sent to the worker.
+
+Ensure proper CORS handling
+
+Confirm that the worker URL is reachable from the browser fetch and that no browser errors prevent the request from being sent.
+
+Output
+
+Provide the updated JS code for the contact form that addresses all the above points.
+
+Only change what’s necessary to fix the submission, validation, and message display.
+
+Keep the rest of the header, nav, and logo scrolling JS unchanged.
