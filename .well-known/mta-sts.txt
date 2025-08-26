@@ -1,1 +1,5 @@
-/.well-known/mta-sts.txt
+version: STSv1
+mode: enforce
+mx: mx00.ionos.co.uk
+mx: mx01.ionos.co.uk
+max_age: 604800
